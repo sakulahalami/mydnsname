@@ -1,722 +1,1297 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>动漫乐园 - 你的二次元世界</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1e293b',
+            secondary: '#4f46e5',
+            accent: '#ec4899',
+            dark: '#0f172a',
+            light: '#f8fafc'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .text-shadow-glow {
+        text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+      }
+      .bg-anime-pattern {
+        background-image: url('https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/1a8cb73f898a4f37939c3f946e8f70ff~tplv-a9rns2rl98-image.image?rcl=20251214043749837DB9D076762B9D4AD4&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1768250322&x-signature=5qBL1m1ygtIexZj%2FxCxiaOqD0oo%3D');
+        background-size: cover;
+        background-position: center;
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .gradient-text {
+        background: linear-gradient(90deg, #ec4899, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+<body class="bg-gray-900 text-light min-h-screen">
+  <!-- 导航栏 -->
+  <header class="sticky top-0 z-50 bg-dark bg-opacity-90 backdrop-blur-md border-b border-gray-800">
+    <nav class="container mx-auto px-4 py-3">
+      <div class="flex justify-between items-center">
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+          <span class="text-accent text-3xl"><i class="fa fa-heart"></i></span>
+          <span class="text-2xl font-bold gradient-text">动漫乐园</span>
         </div>
-    </header>
+        
+        <!-- 桌面导航 -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#" class="text-white hover:text-accent transition-colors font-medium">首页</a>
+          <a href="#popular" class="text-gray-300 hover:text-accent transition-colors">热门动漫</a>
+          <a href="#news" class="text-gray-300 hover:text-accent transition-colors">动漫资讯</a>
+          <a href="#categories" class="text-gray-300 hover:text-accent transition-colors">分类浏览</a>
+          <a href="#recommendations" class="text-gray-300 hover:text-accent transition-colors">个性化推荐</a>
+        </div>
+        
+        <!-- 搜索框 -->
+        <div class="hidden md:flex items-center bg-gray-800 rounded-full px-3 py-1 w-64">
+          <input type="text" placeholder="搜索动漫、资讯..." class="bg-transparent border-none outline-none text-sm w-full">
+          <button class="text-gray-400 hover:text-accent transition-colors">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        
+        <!-- 移动端菜单按钮 -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-button" class="text-gray-300 hover:text-accent transition-colors">
+            <i class="fa fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- 移动端导航菜单 -->
+      <div id="mobile-menu" class="md:hidden hidden pt-4 pb-2">
+        <div class="flex flex-col space-y-3">
+          <a href="#" class="text-white hover:text-accent transition-colors font-medium py-2">首页</a>
+          <a href="#popular" class="text-gray-300 hover:text-accent transition-colors py-2">热门动漫</a>
+          <a href="#news" class="text-gray-300 hover:text-accent transition-colors py-2">动漫资讯</a>
+          <a href="#categories" class="text-gray-300 hover:text-accent transition-colors py-2">分类浏览</a>
+          <a href="#recommendations" class="text-gray-300 hover:text-accent transition-colors py-2">个性化推荐</a>
+        </div>
+        <div class="mt-4 flex items-center bg-gray-800 rounded-full px-3 py-2">
+          <input type="text" placeholder="搜索动漫、资讯..." class="bg-transparent border-none outline-none text-sm w-full">
+          <button class="text-gray-400 hover:text-accent transition-colors">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+  <!-- 主要内容 -->
+  <main>
+    <!-- 英雄区域/轮播图 -->
+    <section class="relative h-[500px] overflow-hidden">
+      <div id="hero-carousel" class="h-full">
+        <!-- 轮播项 1 -->
+        <div class="carousel-item absolute inset-0 bg-cover bg-center" style="background-image: url('https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/2f7f8bb146944a65b9f0aae0efb854da~tplv-a9rns2rl98-image.image?rcl=20251214043749837DB9D076762B9D4AD4&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1768250321&x-signature=rYIP9IL2AEE2Gyodjn2BIgExBvA%3D');">
+          <div class="absolute inset-0 bg-gradient-to-r from-dark to-transparent"></div>
+          <div class="container mx-auto px-4 h-full flex items-center">
+            <div class="max-w-lg" data-aos="fade-right" data-aos-duration="1000">
+              <h1 class="text-4xl md:text-5xl font-bold mb-4 text-shadow-glow">探索二次元世界</h1>
+              <p class="text-lg md:text-xl mb-6 text-gray-200">发现最新番剧、经典回顾和同人创作，尽在动漫乐园</p>
+              <div class="flex space-x-4">
+                <button class="bg-accent hover:bg-pink-600 text-white font-medium px-6 py-2 rounded-full transition-colors">
+                  立即探索
+                </button>
+                <button class="bg-transparent border border-white text-white font-medium px-6 py-2 rounded-full hover:bg-white hover:text-dark transition-colors">
+                  了解更多
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+        
+        <!-- 轮播项 2 -->
+        <div class="carousel-item absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('https://p11-doubao-search-sign.byteimg.com/labis/cf7a8eeb2263fff539e35e9edde02f3e~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=oUR%2FefzNLkq2xF2K1B4koBc5ADI%3D');">
+          <div class="absolute inset-0 bg-gradient-to-r from-dark to-transparent"></div>
+          <div class="container mx-auto px-4 h-full flex items-center">
+            <div class="max-w-lg" data-aos="fade-right" data-aos-duration="1000">
+              <h1 class="text-4xl md:text-5xl font-bold mb-4 text-shadow-glow">进击的巨人</h1>
+              <p class="text-lg md:text-xl mb-6 text-gray-200">史诗级巨作，人类与巨人的终极对决</p>
+              <div class="flex space-x-4">
+                <button class="bg-accent hover:bg-pink-600 text-white font-medium px-6 py-2 rounded-full transition-colors">
+                  观看详情
+                </button>
+                <button class="bg-transparent border border-white text-white font-medium px-6 py-2 rounded-full hover:bg-white hover:text-dark transition-colors">
+                  查看周边
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 轮播项 3 -->
+        <div class="carousel-item absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('https://p3-doubao-search-sign.byteimg.com/pgc-image/b57cf402b5e04dcab76433dab5a22f5e~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=gY13uiQgOtv%2Fgg9knrnBUnXnuJ0%3D');">
+          <div class="absolute inset-0 bg-gradient-to-r from-dark to-transparent"></div>
+          <div class="container mx-auto px-4 h-full flex items-center">
+            <div class="max-w-lg" data-aos="fade-right" data-aos-duration="1000">
+              <h1 class="text-4xl md:text-5xl font-bold mb-4 text-shadow-glow">海贼王</h1>
+              <p class="text-lg md:text-xl mb-6 text-gray-200">踏上伟大航线，寻找传说中的One Piece</p>
+              <div class="flex space-x-4">
+                <button class="bg-accent hover:bg-pink-600 text-white font-medium px-6 py-2 rounded-full transition-colors">
+                  观看详情
+                </button>
+                <button class="bg-transparent border border-white text-white font-medium px-6 py-2 rounded-full hover:bg-white hover:text-dark transition-colors">
+                  查看周边
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 轮播控制按钮 -->
+        <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full w-10 h-10 flex items-center justify-center transition-colors" id="prev-slide">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full w-10 h-10 flex items-center justify-center transition-colors" id="next-slide">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+        
+        <!-- 轮播指示器 -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <button class="w-3 h-3 rounded-full bg-white bg-opacity-100 transition-colors carousel-indicator" data-index="0"></button>
+          <button class="w-3 h-3 rounded-full bg-white bg-opacity-50 transition-colors carousel-indicator" data-index="1"></button>
+          <button class="w-3 h-3 rounded-full bg-white bg-opacity-50 transition-colors carousel-indicator" data-index="2"></button>
+        </div>
+      </div>
     </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+    
+    <!-- 热门动漫区域 -->
+    <section id="popular" class="py-16 bg-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-3xl font-bold gradient-text" data-aos="fade-right">热门动漫</h2>
+          <div class="flex space-x-2">
+            <button class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors">
+              <i class="fa fa-th-large mr-2"></i>网格
+            </button>
+            <button class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors">
+              <i class="fa fa-list mr-2"></i>列表
+            </button>
+          </div>
         </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- 动漫卡片 1 -->
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="100">
+            <div class="relative">
+              <img src="https://p26-doubao-search-sign.byteimg.com/labis/bc9a8ed6cf8498bbf0a994ef5962ef69~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=y7YFC6hTlk0h3uGJOVJplE3n%2BJU%3D" alt="鬼灭之刃" class="w-full h-64 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.5</div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent h-16"></div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-xl font-bold mb-2">鬼灭之刃</h3>
+              <div class="flex items-center text-sm text-gray-400 mb-3">
+                <span class="mr-3"><i class="fa fa-calendar mr-1"></i>2025</span>
+                <span class="mr-3"><i class="fa fa-film mr-1"></i>26集</span>
+                <span><i class="fa fa-tag mr-1"></i>热血/奇幻</span>
+              </div>
+              <p class="text-gray-300 text-sm mb-4 line-clamp-2">炭治郎为了寻找让妹妹祢豆子变回人类的方法，加入了鬼杀队，与各种恶鬼战斗的故事。</p>
+              <div class="flex justify-between items-center">
+                <button class="bg-secondary hover:bg-indigo-600 text-white px-4 py-1 rounded-full text-sm transition-colors">
+                  观看
+                </button>
+                <div class="flex space-x-2">
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-heart-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-bookmark-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-share-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 动漫卡片 2 -->
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
+            <div class="relative">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/cf7a8eeb2263fff539e35e9edde02f3e~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=oUR%2FefzNLkq2xF2K1B4koBc5ADI%3D" alt="进击的巨人" class="w-full h-64 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.8</div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent h-16"></div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-xl font-bold mb-2">进击的巨人</h3>
+              <div class="flex items-center text-sm text-gray-400 mb-3">
+                <span class="mr-3"><i class="fa fa-calendar mr-1"></i>2025</span>
+                <span class="mr-3"><i class="fa fa-film mr-1"></i>16集</span>
+                <span><i class="fa fa-tag mr-1"></i>热血/悬疑</span>
+              </div>
+              <p class="text-gray-300 text-sm mb-4 line-clamp-2">人类被迫躲在三重巨墙内生活，艾伦·耶格尔发誓要消灭所有巨人，为人类争取自由。</p>
+              <div class="flex justify-between items-center">
+                <button class="bg-secondary hover:bg-indigo-600 text-white px-4 py-1 rounded-full text-sm transition-colors">
+                  观看
+                </button>
+                <div class="flex space-x-2">
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-heart-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-bookmark-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-share-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 动漫卡片 3 -->
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="300">
+            <div class="relative">
+              <img src="https://p3-doubao-search-sign.byteimg.com/pgc-image/b57cf402b5e04dcab76433dab5a22f5e~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=gY13uiQgOtv%2Fgg9knrnBUnXnuJ0%3D" alt="海贼王" class="w-full h-64 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.6</div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent h-16"></div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-xl font-bold mb-2">海贼王</h3>
+              <div class="flex items-center text-sm text-gray-400 mb-3">
+                <span class="mr-3"><i class="fa fa-calendar mr-1"></i>1999</span>
+                <span class="mr-3"><i class="fa fa-film mr-1"></i>1000+集</span>
+                <span><i class="fa fa-tag mr-1"></i>冒险/热血</span>
+              </div>
+              <p class="text-gray-300 text-sm mb-4 line-clamp-2">蒙奇·D·路飞为了实现与香克斯的约定，踏上了寻找One Piece成为海贼王的冒险之旅。</p>
+              <div class="flex justify-between items-center">
+                <button class="bg-secondary hover:bg-indigo-600 text-white px-4 py-1 rounded-full text-sm transition-colors">
+                  观看
+                </button>
+                <div class="flex space-x-2">
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-heart-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-bookmark-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-share-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 动漫卡片 4 -->
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="400">
+            <div class="relative">
+              <img src="https://p3-doubao-search-sign.byteimg.com/pgc-image/b87ffd592d1f493eb3e11b5caa11533f~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=AZj%2BvuF71AwPrei3MbbSAxOfI4s%3D" alt="龙珠超" class="w-full h-64 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.3</div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent h-16"></div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-xl font-bold mb-2">龙珠超</h3>
+              <div class="flex items-center text-sm text-gray-400 mb-3">
+                <span class="mr-3"><i class="fa fa-calendar mr-1"></i>2015</span>
+                <span class="mr-3"><i class="fa fa-film mr-1"></i>131集</span>
+                <span><i class="fa fa-tag mr-1"></i>动作/冒险</span>
+              </div>
+              <p class="text-gray-300 text-sm mb-4 line-clamp-2">悟空和他的朋友们在击败魔人布欧后，面对来自宇宙的新威胁，展开了更加强大的战斗。</p>
+              <div class="flex justify-between items-center">
+                <button class="bg-secondary hover:bg-indigo-600 text-white px-4 py-1 rounded-full text-sm transition-colors">
+                  观看
+                </button>
+                <div class="flex space-x-2">
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-heart-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-bookmark-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-share-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 动漫卡片 5 -->
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="500">
+            <div class="relative">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/ec4ac9447084a3a0848bf2d3f81f6a63~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=6FLfgf8KRZCsoLxh%2FJUZDM1ZgOw%3D" alt="我的英雄学院" class="w-full h-64 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.0</div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent h-16"></div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-xl font-bold mb-2">我的英雄学院</h3>
+              <div class="flex items-center text-sm text-gray-400 mb-3">
+                <span class="mr-3"><i class="fa fa-calendar mr-1"></i>2016</span>
+                <span class="mr-3"><i class="fa fa-film mr-1"></i>113集</span>
+                <span><i class="fa fa-tag mr-1"></i>热血/超能力</span>
+              </div>
+              <p class="text-gray-300 text-sm mb-4 line-clamp-2">在一个超能力普及的世界，无能力者绿谷出久梦想成为英雄，得到了最强英雄欧尔麦特的传承。</p>
+              <div class="flex justify-between items-center">
+                <button class="bg-secondary hover:bg-indigo-600 text-white px-4 py-1 rounded-full text-sm transition-colors">
+                  观看
+                </button>
+                <div class="flex space-x-2">
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-heart-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-bookmark-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-share-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 动漫卡片 6 -->
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="600">
+            <div class="relative">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/2da16626633847af0fadb28d63c1513f~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=CyVna8qZwdrYeLqHano4wlHdxak%3D" alt="天气之子" class="w-full h-64 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.2</div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent h-16"></div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-xl font-bold mb-2">天气之子</h3>
+              <div class="flex items-center text-sm text-gray-400 mb-3">
+                <span class="mr-3"><i class="fa fa-calendar mr-1"></i>2019</span>
+                <span class="mr-3"><i class="fa fa-film mr-1"></i>电影</span>
+                <span><i class="fa fa-tag mr-1"></i>爱情/奇幻</span>
+              </div>
+              <p class="text-gray-300 text-sm mb-4 line-clamp-2">离家出走的少年帆高遇到了拥有改变天气能力的少女阳菜，两人在东京展开了一段奇幻故事。</p>
+              <div class="flex justify-between items-center">
+                <button class="bg-secondary hover:bg-indigo-600 text-white px-4 py-1 rounded-full text-sm transition-colors">
+                  观看
+                </button>
+                <div class="flex space-x-2">
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-heart-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-bookmark-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-share-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 动漫卡片 7 -->
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="700">
+            <div class="relative">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/e386535a89828bb594358581ad915fe2~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=lQLrBy49gJTdDnc6GcO0iguu1d8%3D" alt="火影忍者" class="w-full h-64 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.4</div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent h-16"></div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-xl font-bold mb-2">火影忍者</h3>
+              <div class="flex items-center text-sm text-gray-400 mb-3">
+                <span class="mr-3"><i class="fa fa-calendar mr-1"></i>2002</span>
+                <span class="mr-3"><i class="fa fa-film mr-1"></i>720集</span>
+                <span><i class="fa fa-tag mr-1"></i>忍者/热血</span>
+              </div>
+              <p class="text-gray-300 text-sm mb-4 line-clamp-2">漩涡鸣人从小被村里人排斥，但他始终梦想成为火影，保护村子和伙伴，经历了无数战斗和成长。</p>
+              <div class="flex justify-between items-center">
+                <button class="bg-secondary hover:bg-indigo-600 text-white px-4 py-1 rounded-full text-sm transition-colors">
+                  观看
+                </button>
+                <div class="flex space-x-2">
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-heart-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-bookmark-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-share-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 动漫卡片 8 -->
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="800">
+            <div class="relative">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/2b92a05fb567833207f91a0e1dbc88f9~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=RjZu3eLRF3bYjOi%2BtUDd7OpdKlI%3D" alt="龙与虎" class="w-full h-64 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.1</div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent h-16"></div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-xl font-bold mb-2">龙与虎</h3>
+              <div class="flex items-center text-sm text-gray-400 mb-3">
+                <span class="mr-3"><i class="fa fa-calendar mr-1"></i>2008</span>
+                <span class="mr-3"><i class="fa fa-film mr-1"></i>25集</span>
+                <span><i class="fa fa-tag mr-1"></i>校园/爱情</span>
+              </div>
+              <p class="text-gray-300 text-sm mb-4 line-clamp-2">外表凶恶但内心温柔的"掌中老虎"逢坂大河与"温柔恶魔"高须龙儿之间的校园恋爱故事。</p>
+              <div class="flex justify-between items-center">
+                <button class="bg-secondary hover:bg-indigo-600 text-white px-4 py-1 rounded-full text-sm transition-colors">
+                  观看
+                </button>
+                <div class="flex space-x-2">
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-heart-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-bookmark-o"></i>
+                  </button>
+                  <button class="text-gray-400 hover:text-accent transition-colors">
+                    <i class="fa fa-share-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 加载更多按钮 -->
+        <div class="mt-10 text-center">
+          <button class="bg-gray-800 hover:bg-gray-700 text-white font-medium px-8 py-3 rounded-full transition-colors">
+            加载更多 <i class="fa fa-refresh ml-2"></i>
+          </button>
+        </div>
+      </div>
     </section>
-
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
+    
+    <!-- 动漫资讯区域 -->
+    <section id="news" class="py-16 bg-gray-800">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold gradient-text mb-8" data-aos="fade-right">动漫资讯</h2>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- 主要资讯 -->
+          <div class="lg:col-span-2" data-aos="fade-up">
+            <div class="bg-gray-900 rounded-xl overflow-hidden shadow-lg">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/cf7a8eeb2263fff539e35e9edde02f3e~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=oUR%2FefzNLkq2xF2K1B4koBc5ADI%3D" alt="进击的巨人最终季" class="w-full h-80 object-cover">
+              <div class="p-6">
+                <div class="flex items-center text-sm text-gray-400 mb-3">
+                  <span class="mr-4"><i class="fa fa-calendar mr-1"></i>2025-12-10</span>
+                  <span><i class="fa fa-tag mr-1"></i>新番资讯</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">《进击的巨人》最终季完结篇制作决定，2026年春季上映</h3>
+                <p class="text-gray-300 mb-6">据官方消息，《进击的巨人》最终季完结篇正式宣布制作决定，将于2026年春季上映。这部陪伴了观众十余年的史诗级作品即将迎来最终结局，艾伦与三笠、阿尔敏等人的故事将如何收尾，引发全球粉丝热议。</p>
+                <div class="flex justify-between items-center">
+                  <button class="bg-accent hover:bg-pink-600 text-white px-5 py-2 rounded-full transition-colors">
+                    阅读全文
+                  </button>
+                  <div class="flex items-center space-x-4 text-gray-400">
+                    <span><i class="fa fa-eye mr-1"></i> 12,345</span>
+                    <span><i class="fa fa-comment-o mr-1"></i> 234</span>
+                    <span><i class="fa fa-heart-o mr-1"></i> 1,234</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+          </div>
+          
+          <!-- 资讯列表 -->
+          <div class="space-y-6" data-aos="fade-left" data-aos-delay="200">
+            <!-- 资讯项 1 -->
+            <div class="bg-gray-900 rounded-xl overflow-hidden shadow-lg flex">
+              <img src="https://p26-doubao-search-sign.byteimg.com/labis/bc9a8ed6cf8498bbf0a994ef5962ef69~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=y7YFC6hTlk0h3uGJOVJplE3n%2BJU%3D" alt="鬼灭之刃" class="w-1/3 object-cover">
+              <div class="p-4 flex-1">
+                <div class="flex items-center text-xs text-gray-400 mb-2">
+                  <span class="mr-3"><i class="fa fa-calendar mr-1"></i>2025-12-08</span>
+                  <span><i class="fa fa-tag mr-1"></i>新番资讯</span>
                 </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+                <h3 class="text-lg font-bold mb-2">《鬼灭之刃》第三季锻刀村篇制作决定</h3>
+                <p class="text-gray-400 text-sm mb-3 line-clamp-2">灶门炭治郎将在锻刀村篇中获得新的刀，同时面临更强大的敌人...</p>
+                <div class="flex justify-between items-center text-xs text-gray-500">
+                  <span><i class="fa fa-eye mr-1"></i> 8,921</span>
+                  <button class="text-accent hover:underline">阅读更多</button>
                 </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
+              </div>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
             
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
+            <!-- 资讯项 2 -->
+            <div class="bg-gray-900 rounded-xl overflow-hidden shadow-lg flex">
+              <img src="https://p3-doubao-search-sign.byteimg.com/pgc-image/b57cf402b5e04dcab76433dab5a22f5e~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=gY13uiQgOtv%2Fgg9knrnBUnXnuJ0%3D" alt="海贼王" class="w-1/3 object-cover">
+              <div class="p-4 flex-1">
+                <div class="flex items-center text-xs text-gray-400 mb-2">
+                  <span class="mr-3"><i class="fa fa-calendar mr-1"></i>2025-12-07</span>
+                  <span><i class="fa fa-tag mr-1"></i>动画进展</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2">《海贼王》动画将进入最终章，路飞将与红发对决</h3>
+                <p class="text-gray-400 text-sm mb-3 line-clamp-2">根据尾田荣一郎的原作，动画将进入最终章，路飞将与红发香克斯展开对决...</p>
+                <div class="flex justify-between items-center text-xs text-gray-500">
+                  <span><i class="fa fa-eye mr-1"></i> 10,542</span>
+                  <button class="text-accent hover:underline">阅读更多</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 资讯项 3 -->
+            <div class="bg-gray-900 rounded-xl overflow-hidden shadow-lg flex">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/ec4ac9447084a3a0848bf2d3f81f6a63~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=6FLfgf8KRZCsoLxh%2FJUZDM1ZgOw%3D" alt="我的英雄学院" class="w-1/3 object-cover">
+              <div class="p-4 flex-1">
+                <div class="flex items-center text-xs text-gray-400 mb-2">
+                  <span class="mr-3"><i class="fa fa-calendar mr-1"></i>2025-12-05</span>
+                  <span><i class="fa fa-tag mr-1"></i>剧场版</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2">《我的英雄学院》第五部剧场版制作决定</h3>
+                <p class="text-gray-400 text-sm mb-3 line-clamp-2">绿谷出久将在新剧场版中面对新的敌人，欧尔麦特的秘密将被揭露...</p>
+                <div class="flex justify-between items-center text-xs text-gray-500">
+                  <span><i class="fa fa-eye mr-1"></i> 7,832</span>
+                  <button class="text-accent hover:underline">阅读更多</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 资讯项 4 -->
+            <div class="bg-gray-900 rounded-xl overflow-hidden shadow-lg flex">
+              <img src="https://p3-doubao-search-sign.byteimg.com/pgc-image/b87ffd592d1f493eb3e11b5caa11533f~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=AZj%2BvuF71AwPrei3MbbSAxOfI4s%3D" alt="龙珠超" class="w-1/3 object-cover">
+              <div class="p-4 flex-1">
+                <div class="flex items-center text-xs text-gray-400 mb-2">
+                  <span class="mr-3"><i class="fa fa-calendar mr-1"></i>2025-12-03</span>
+                  <span><i class="fa fa-tag mr-1"></i>动画进展</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2">《龙珠超》新系列确认制作，悟空将迎战更强敌人</h3>
+                <p class="text-gray-400 text-sm mb-3 line-clamp-2">鸟山明确认《龙珠超》新系列正在制作中，悟空将超越自在极意功...</p>
+                <div class="flex justify-between items-center text-xs text-gray-500">
+                  <span><i class="fa fa-eye mr-1"></i> 9,456</span>
+                  <button class="text-accent hover:underline">阅读更多</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 更多资讯按钮 -->
+        <div class="mt-10 text-center">
+          <button class="bg-gray-700 hover:bg-gray-600 text-white font-medium px-8 py-3 rounded-full transition-colors">
+            查看更多资讯 <i class="fa fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 动漫分类浏览 -->
+    <section id="categories" class="py-16 bg-gray-900">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold gradient-text mb-8" data-aos="fade-right">动漫分类浏览</h2>
+        
+        <!-- 分类标签 -->
+        <div class="flex flex-wrap gap-3 mb-8" data-aos="fade-up">
+          <button class="bg-accent text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">全部</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">热血</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">奇幻</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">冒险</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">校园</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">爱情</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">悬疑</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">科幻</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">搞笑</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">治愈</button>
+        </div>
+        
+        <!-- 季度筛选 -->
+        <div class="flex flex-wrap gap-3 mb-8" data-aos="fade-up" data-aos-delay="100">
+          <button class="bg-secondary text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">全部季度</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">2025年冬季</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">2024年秋季</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">2024年夏季</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">2024年春季</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">2023年</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">2022年</button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors">更早</button>
+        </div>
+        
+        <!-- 分类内容 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- 分类动漫卡片 1 -->
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="100">
+            <div class="relative">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/4a358ffc4cc1f62b949fc6ea424b21e9~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=Lhos2WzV9sLGJXHhmIbJXTKZsKs%3D" alt="月色真美" class="w-full h-48 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">8.9</div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">月色真美</h3>
+              <div class="flex items-center text-xs text-gray-400 mb-3">
+                <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2017</span>
+                <span><i class="fa fa-tag mr-1"></i>校园/爱情</span>
+              </div>
+              <p class="text-gray-300 text-xs mb-3 line-clamp-2">讲述了性格内向的安昙小太郎和活泼开朗的水野茜在中学三年级的恋爱故事。</p>
+              <button class="w-full bg-gray-700 hover:bg-gray-600 text-white py-1 rounded text-sm transition-colors">
+                查看详情
+              </button>
+            </div>
+          </div>
+          
+          <!-- 分类动漫卡片 2-16（类似结构，省略） -->
+          <!-- 为了简化代码，这里只展示部分卡片 -->
+          
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
+            <div class="relative">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/2da16626633847af0fadb28d63c1513f~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=CyVna8qZwdrYeLqHano4wlHdxak%3D" alt="天气之子" class="w-full h-48 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.2</div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">天气之子</h3>
+              <div class="flex items-center text-xs text-gray-400 mb-3">
+                <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2019</span>
+                <span><i class="fa fa-tag mr-1"></i>爱情/奇幻</span>
+              </div>
+              <p class="text-gray-300 text-xs mb-3 line-clamp-2">离家出走的少年帆高遇到了拥有改变天气能力的少女阳菜，两人在东京展开了一段奇幻故事。</p>
+              <button class="w-full bg-gray-700 hover:bg-gray-600 text-white py-1 rounded text-sm transition-colors">
+                查看详情
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="300">
+            <div class="relative">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/2b92a05fb567833207f91a0e1dbc88f9~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=RjZu3eLRF3bYjOi%2BtUDd7OpdKlI%3D" alt="龙与虎" class="w-full h-48 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.1</div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">龙与虎</h3>
+              <div class="flex items-center text-xs text-gray-400 mb-3">
+                <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2008</span>
+                <span><i class="fa fa-tag mr-1"></i>校园/爱情</span>
+              </div>
+              <p class="text-gray-300 text-xs mb-3 line-clamp-2">外表凶恶但内心温柔的"掌中老虎"逢坂大河与"温柔恶魔"高须龙儿之间的校园恋爱故事。</p>
+              <button class="w-full bg-gray-700 hover:bg-gray-600 text-white py-1 rounded text-sm transition-colors">
+                查看详情
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="400">
+            <div class="relative">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/e386535a89828bb594358581ad915fe2~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=lQLrBy49gJTdDnc6GcO0iguu1d8%3D" alt="火影忍者" class="w-full h-48 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.4</div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">火影忍者</h3>
+              <div class="flex items-center text-xs text-gray-400 mb-3">
+                <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2002</span>
+                <span><i class="fa fa-tag mr-1"></i>忍者/热血</span>
+              </div>
+              <p class="text-gray-300 text-xs mb-3 line-clamp-2">漩涡鸣人从小被村里人排斥，但他始终梦想成为火影，保护村子和伙伴，经历了无数战斗和成长。</p>
+              <button class="w-full bg-gray-700 hover:bg-gray-600 text-white py-1 rounded text-sm transition-colors">
+                查看详情
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="500">
+            <div class="relative">
+              <img src="https://p26-doubao-search-sign.byteimg.com/labis/bc9a8ed6cf8498bbf0a994ef5962ef69~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=y7YFC6hTlk0h3uGJOVJplE3n%2BJU%3D" alt="鬼灭之刃" class="w-full h-48 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.5</div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">鬼灭之刃</h3>
+              <div class="flex items-center text-xs text-gray-400 mb-3">
+                <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2019</span>
+                <span><i class="fa fa-tag mr-1"></i>热血/奇幻</span>
+              </div>
+              <p class="text-gray-300 text-xs mb-3 line-clamp-2">炭治郎为了寻找让妹妹祢豆子变回人类的方法，加入了鬼杀队，与各种恶鬼战斗的故事。</p>
+              <button class="w-full bg-gray-700 hover:bg-gray-600 text-white py-1 rounded text-sm transition-colors">
+                查看详情
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="600">
+            <div class="relative">
+              <img src="https://p11-doubao-search-sign.byteimg.com/labis/cf7a8eeb2263fff539e35e9edde02f3e~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=oUR%2FefzNLkq2xF2K1B4koBc5ADI%3D" alt="进击的巨人" class="w-full h-48 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.8</div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">进击的巨人</h3>
+              <div class="flex items-center text-xs text-gray-400 mb-3">
+                <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2013</span>
+                <span><i class="fa fa-tag mr-1"></i>热血/悬疑</span>
+              </div>
+              <p class="text-gray-300 text-xs mb-3 line-clamp-2">人类被迫躲在三重巨墙内生活，艾伦·耶格尔发誓要消灭所有巨人，为人类争取自由。</p>
+              <button class="w-full bg-gray-700 hover:bg-gray-600 text-white py-1 rounded text-sm transition-colors">
+                查看详情
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="700">
+            <div class="relative">
+              <img src="https://p3-doubao-search-sign.byteimg.com/pgc-image/b57cf402b5e04dcab76433dab5a22f5e~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=gY13uiQgOtv%2Fgg9knrnBUnXnuJ0%3D" alt="海贼王" class="w-full h-48 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.6</div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">海贼王</h3>
+              <div class="flex items-center text-xs text-gray-400 mb-3">
+                <span class="mr-2"><i class="fa fa-calendar mr-1"></i>1999</span>
+                <span><i class="fa fa-tag mr-1"></i>冒险/热血</span>
+              </div>
+              <p class="text-gray-300 text-xs mb-3 line-clamp-2">蒙奇·D·路飞为了实现与香克斯的约定，踏上了寻找One Piece成为海贼王的冒险之旅。</p>
+              <button class="w-full bg-gray-700 hover:bg-gray-600 text-white py-1 rounded text-sm transition-colors">
+                查看详情
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="800">
+            <div class="relative">
+              <img src="https://p3-doubao-search-sign.byteimg.com/pgc-image/b87ffd592d1f493eb3e11b5caa11533f~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=AZj%2BvuF71AwPrei3MbbSAxOfI4s%3D" alt="龙珠超" class="w-full h-48 object-cover">
+              <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.3</div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">龙珠超</h3>
+              <div class="flex items-center text-xs text-gray-400 mb-3">
+                <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2015</span>
+                <span><i class="fa fa-tag mr-1"></i>动作/冒险</span>
+              </div>
+              <p class="text-gray-300 text-xs mb-3 line-clamp-2">悟空和他的朋友们在击败魔人布欧后，面对来自宇宙的新威胁，展开了更加强大的战斗。</p>
+              <button class="w-full bg-gray-700 hover:bg-gray-600 text-white py-1 rounded text-sm transition-colors">
+                查看详情
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 分页 -->
+        <div class="mt-10 flex justify-center">
+          <nav class="flex items-center space-x-2">
+            <button class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 text-white transition-colors">
+              <i class="fa fa-chevron-left"></i>
+            </button>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full bg-accent text-white transition-colors">1</button>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 text-white transition-colors">2</button>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 text-white transition-colors">3</button>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 text-white transition-colors">4</button>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 text-white transition-colors">5</button>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 text-white transition-colors">
+              <i class="fa fa-chevron-right"></i>
+            </button>
+          </nav>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 个性化推荐系统 -->
+    <section id="recommendations" class="py-16 bg-gray-800">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-3xl font-bold gradient-text" data-aos="fade-right">为你推荐</h2>
+          <button class="bg-accent hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition-colors flex items-center" id="refresh-recommendations">
+            <i class="fa fa-refresh mr-2"></i> 刷新推荐
+          </button>
+        </div>
+        
+        <div class="bg-gray-900 rounded-2xl p-6 shadow-lg" data-aos="fade-up">
+          <div class="mb-6">
+            <h3 class="text-xl font-bold mb-4">根据你的浏览历史</h3>
+            <div class="flex flex-wrap gap-3 mb-4">
+              <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm flex items-center">
+                热血 <button class="ml-1 text-gray-500 hover:text-white"><i class="fa fa-times-circle"></i></button>
+              </span>
+              <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm flex items-center">
+                奇幻 <button class="ml-1 text-gray-500 hover:text-white"><i class="fa fa-times-circle"></i></button>
+              </span>
+              <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm flex items-center">
+                冒险 <button class="ml-1 text-gray-500 hover:text-white"><i class="fa fa-times-circle"></i></button>
+              </span>
+              <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm flex items-center">
+                动作 <button class="ml-1 text-gray-500 hover:text-white"><i class="fa fa-times-circle"></i></button>
+              </span>
+              <button class="bg-secondary hover:bg-indigo-600 text-white px-3 py-1 rounded-full text-sm transition-colors">
+                <i class="fa fa-plus mr-1"></i> 添加兴趣
+              </button>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" id="recommendations-container">
+            <!-- 推荐动漫卡片 1 -->
+            <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="100">
+              <div class="relative">
+                <img src="https://p26-doubao-search-sign.byteimg.com/labis/516288eb5a89e9b2b7320f5367f647c7~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=%2FmE4ZkwXw8U8zVgxBzmm6%2FU%2Bbhk%3D" alt="鬼灭之刃：无限列车篇" class="w-full h-48 object-cover">
+                <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.5</div>
+                <div class="absolute top-2 left-2 bg-secondary text-white text-xs font-bold px-2 py-1 rounded">98% 匹配</div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg font-bold mb-1">鬼灭之刃：无限列车篇</h3>
+                <div class="flex items-center text-xs text-gray-400 mb-3">
+                  <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2020</span>
+                  <span><i class="fa fa-tag mr-1"></i>热血/奇幻</span>
+                </div>
+                <button class="w-full bg-accent hover:bg-pink-600 text-white py-1 rounded text-sm transition-colors">
+                  立即观看
+                </button>
+              </div>
+            </div>
+            
+            <!-- 推荐动漫卡片 2 -->
+            <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
+              <div class="relative">
+                <img src="https://p11-doubao-search-sign.byteimg.com/labis/42ecf79b8eab4c2017bc6637086366fc~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=2zVvBih7KMf%2BfBpz2cxLlDdgvW4%3D" alt="进击的巨人：最终季" class="w-full h-48 object-cover">
+                <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.8</div>
+                <div class="absolute top-2 left-2 bg-secondary text-white text-xs font-bold px-2 py-1 rounded">96% 匹配</div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg font-bold mb-1">进击的巨人：最终季</h3>
+                <div class="flex items-center text-xs text-gray-400 mb-3">
+                  <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2020</span>
+                  <span><i class="fa fa-tag mr-1"></i>热血/悬疑</span>
+                </div>
+                <button class="w-full bg-accent hover:bg-pink-600 text-white py-1 rounded text-sm transition-colors">
+                  立即观看
+                </button>
+              </div>
+            </div>
+            
+            <!-- 推荐动漫卡片 3 -->
+            <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="300">
+              <div class="relative">
+                <img src="https://p3-doubao-search-sign.byteimg.com/pgc-image/e13aa760155040109e6036903cb47b4f~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=ojVTph3REaZn%2FWjNxsKoqvk6YHI%3D" alt="龙珠超：布罗利" class="w-full h-48 object-cover">
+                <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.3</div>
+                <div class="absolute top-2 left-2 bg-secondary text-white text-xs font-bold px-2 py-1 rounded">94% 匹配</div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg font-bold mb-1">龙珠超：布罗利</h3>
+                <div class="flex items-center text-xs text-gray-400 mb-3">
+                  <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2018</span>
+                  <span><i class="fa fa-tag mr-1"></i>动作/冒险</span>
+                </div>
+                <button class="w-full bg-accent hover:bg-pink-600 text-white py-1 rounded text-sm transition-colors">
+                  立即观看
+                </button>
+              </div>
+            </div>
+            
+            <!-- 推荐动漫卡片 4 -->
+            <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="400">
+              <div class="relative">
+                <img src="https://p11-doubao-search-sign.byteimg.com/labis/12fb8ad46bfeab419499a3ba7398de0e~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=plMTDnYLvhjYd7yx1r3kqsoSJdY%3D" alt="进击的巨人：无悔的选择" class="w-full h-48 object-cover">
+                <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.6</div>
+                <div class="absolute top-2 left-2 bg-secondary text-white text-xs font-bold px-2 py-1 rounded">92% 匹配</div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg font-bold mb-1">进击的巨人：无悔的选择</h3>
+                <div class="flex items-center text-xs text-gray-400 mb-3">
+                  <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2014</span>
+                  <span><i class="fa fa-tag mr-1"></i>热血/悬疑</span>
+                </div>
+                <button class="w-full bg-accent hover:bg-pink-600 text-white py-1 rounded text-sm transition-colors">
+                  立即观看
+                </button>
+              </div>
+            </div>
+            
+            <!-- 推荐动漫卡片 5 -->
+            <div class="bg-gray-800 rounded-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="500">
+              <div class="relative">
+                <img src="https://p11-doubao-search-sign.byteimg.com/labis/dff8911bae73beb1c32a25b6996c40b9~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=NzNcioqkUu0gJwUZte9ZfzfPsIM%3D" alt="我的英雄学院：两位英雄" class="w-full h-48 object-cover">
+                <div class="absolute top-2 right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">9.0</div>
+                <div class="absolute top-2 left-2 bg-secondary text-white text-xs font-bold px-2 py-1 rounded">90% 匹配</div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg font-bold mb-1">我的英雄学院：两位英雄</h3>
+                <div class="flex items-center text-xs text-gray-400 mb-3">
+                  <span class="mr-2"><i class="fa fa-calendar mr-1"></i>2018</span>
+                  <span><i class="fa fa-tag mr-1"></i>热血/超能力</span>
+                </div>
+                <button class="w-full bg-accent hover:bg-pink-600 text-white py-1 rounded text-sm transition-colors">
+                  立即观看
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 更多推荐 -->
+          <div class="mt-8">
+            <h3 class="text-xl font-bold mb-4">你可能还喜欢</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              <!-- 小卡片 1-6 -->
+              <div class="bg-gray-800 rounded-lg overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://p11-doubao-search-sign.byteimg.com/labis/93f1335d5790f31416a8367455e4c133~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=jVDhjZSLLHfm5hkxi%2BmzaOy5JqE%3D" alt="进击的巨人" class="w-full h-32 object-cover">
+                <div class="p-2">
+                  <h4 class="text-sm font-medium truncate">进击的巨人：起源</h4>
+                  <div class="flex items-center text-xs text-gray-400">
+                    <span><i class="fa fa-star text-yellow-500 mr-1"></i>9.7</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bg-gray-800 rounded-lg overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://p3-doubao-search-sign.byteimg.com/pgc-image/8b896dc135b94a64887d55c2df02e3b7~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=71mvZ%2BHaRuavUJYUdWOY0SZlfLk%3D" alt="海贼王" class="w-full h-32 object-cover">
+                <div class="p-2">
+                  <h4 class="text-sm font-medium truncate">海贼王：红发歌姬</h4>
+                  <div class="flex items-center text-xs text-gray-400">
+                    <span><i class="fa fa-star text-yellow-500 mr-1"></i>9.4</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bg-gray-800 rounded-lg overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://p26-doubao-search-sign.byteimg.com/labis/image/c49148cbbc9829b6b28caf9c4456f49f~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=DK3e9vjcEpRR7IlbPzxYtOuQLlw%3D" alt="鬼灭之刃" class="w-full h-32 object-cover">
+                <div class="p-2">
+                  <h4 class="text-sm font-medium truncate">鬼灭之刃：锻刀村篇</h4>
+                  <div class="flex items-center text-xs text-gray-400">
+                    <span><i class="fa fa-star text-yellow-500 mr-1"></i>9.5</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bg-gray-800 rounded-lg overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="400">
+                <img src="https://p3-doubao-search-sign.byteimg.com/labis/d55c475b1ecb6fe6a93aee94025cf980~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=Tc1EDZuk6qKh6x0WL0rb35j1d%2FQ%3D" alt="龙珠超" class="w-full h-32 object-cover">
+                <div class="p-2">
+                  <h4 class="text-sm font-medium truncate">龙珠超：超级英雄</h4>
+                  <div class="flex items-center text-xs text-gray-400">
+                    <span><i class="fa fa-star text-yellow-500 mr-1"></i>9.2</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bg-gray-800 rounded-lg overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="500">
+                <img src="https://p11-doubao-search-sign.byteimg.com/labis/12a9fb394545f2d4962d0f3fe7629a4a~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=AToLDHh%2FM%2Bkmd4Lu8F8Izqi3wbk%3D" alt="我的英雄学院" class="w-full h-32 object-cover">
+                <div class="p-2">
+                  <h4 class="text-sm font-medium truncate">我的英雄学院：世界英雄任务</h4>
+                  <div class="flex items-center text-xs text-gray-400">
+                    <span><i class="fa fa-star text-yellow-500 mr-1"></i>9.1</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bg-gray-800 rounded-lg overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="600">
+                <img src="https://p11-doubao-search-sign.byteimg.com/labis/a1381ab346c8252eb335b9f24984cb03~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1781210277&x-signature=jwpeHdSyDcus%2BW23T1Zl19KKMUs%3D" alt="我的英雄学院" class="w-full h-32 object-cover">
+                <div class="p-2">
+                  <h4 class="text-sm font-medium truncate">我的英雄学院：英雄崛起</h4>
+                  <div class="flex items-center text-xs text-gray-400">
+                    <span><i class="fa fa-star text-yellow-500 mr-1"></i>9.0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 订阅区域 -->
+    <section class="py-16 bg-gradient-to-r from-gray-900 to-gray-800">
+      <div class="container mx-auto px-4">
+        <div class="bg-gray-800 rounded-2xl p-8 md:p-12 shadow-lg relative overflow-hidden" data-aos="fade-up">
+          <div class="absolute top-0 right-0 w-1/3 h-full opacity-10">
+            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/1a8cb73f898a4f37939c3f946e8f70ff~tplv-a9rns2rl98-image.image?rcl=20251214043749837DB9D076762B9D4AD4&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1768250322&x-signature=5qBL1m1ygtIexZj%2FxCxiaOqD0oo%3D" alt="背景" class="w-full h-full object-cover">
+          </div>
+          
+          <div class="relative z-10 max-w-xl">
+            <h2 class="text-3xl font-bold mb-4">订阅动漫资讯</h2>
+            <p class="text-gray-300 mb-6">第一时间获取最新动漫资讯、新番预告和独家内容，不要错过任何精彩！</p>
+            
+            <form class="flex flex-col sm:flex-row gap-4">
+              <input type="email" placeholder="输入你的邮箱地址" class="flex-1 bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent">
+              <button type="submit" class="bg-accent hover:bg-pink-600 text-white font-medium px-6 py-3 rounded-lg transition-colors whitespace-nowrap">
+                立即订阅 <i class="fa fa-paper-plane ml-2"></i>
+              </button>
+            </form>
+            
+            <p class="text-gray-400 text-sm mt-4">我们尊重你的隐私，不会向第三方分享你的信息。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+  <!-- 页脚 -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- 关于我们 -->
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">关于我们</h3>
+          <p class="mb-4">动漫乐园是一个专注于动漫内容的综合性平台，为动漫爱好者提供最新资讯、热门作品和个性化推荐。</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+              <i class="fa fa-instagram"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+              <i class="fa fa-youtube"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+              <i class="fa fa-discord"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- 快速链接 -->
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-accent transition-colors">首页</a></li>
+            <li><a href="#popular" class="hover:text-accent transition-colors">热门动漫</a></li>
+            <li><a href="#news" class="hover:text-accent transition-colors">动漫资讯</a></li>
+            <li><a href="#categories" class="hover:text-accent transition-colors">分类浏览</a></li>
+            <li><a href="#recommendations" class="hover:text-accent transition-colors">个性化推荐</a></li>
+          </ul>
+        </div>
+        
+        <!-- 帮助中心 -->
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">帮助中心</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-accent transition-colors">常见问题</a></li>
+            <li><a href="#" class="hover:text-accent transition-colors">使用指南</a></li>
+            <li><a href="#" class="hover:text-accent transition-colors">意见反馈</a></li>
+            <li><a href="#" class="hover:text-accent transition-colors">联系我们</a></li>
+            <li><a href="#" class="hover:text-accent transition-colors">隐私政策</a></li>
+          </ul>
+        </div>
+        
+        <!-- 联系方式 -->
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">联系方式</h3>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fa fa-envelope-o mt-1 mr-3"></i>
+              <span>contact@animeland.com</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-phone mt-1 mr-3"></i>
+              <span>+86 123 4567 8910</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-map-marker mt-1 mr-3"></i>
+              <span>北京市朝阳区动漫大道123号</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+        <p>&copy; 2025 动漫乐园. 保留所有权利.</p>
+        <div class="flex space-x-4 mt-4 md:mt-0">
+          <a href="#" class="text-sm hover:text-accent transition-colors">使用条款</a>
+          <a href="#" class="text-sm hover:text-accent transition-colors">隐私政策</a>
+          <a href="#" class="text-sm hover:text-accent transition-colors">Cookie政策</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="fixed bottom-6 right-6 bg-accent hover:bg-pink-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all opacity-0 invisible">
+    <i class="fa fa-chevron-up"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    // 初始化AOS动画库
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+      });
+      
+      // 移动端菜单切换
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+      });
+      
+      // 轮播图功能
+      const carouselItems = document.querySelectorAll('.carousel-item');
+      const indicators = document.querySelectorAll('.carousel-indicator');
+      const prevButton = document.getElementById('prev-slide');
+      const nextButton = document.getElementById('next-slide');
+      let currentSlide = 0;
+      const totalSlides = carouselItems.length;
+      
+      function showSlide(index) {
+        // 隐藏所有幻灯片
+        carouselItems.forEach(item => {
+          item.style.opacity = '0';
+          item.style.zIndex = '0';
         });
-    </script>
+        
+        // 重置所有指示器
+        indicators.forEach(indicator => {
+          indicator.classList.remove('bg-opacity-100');
+          indicator.classList.add('bg-opacity-50');
+        });
+        
+        // 显示当前幻灯片
+        carouselItems[index].style.opacity = '1';
+        carouselItems[index].style.zIndex = '1';
+        
+        // 激活当前指示器
+        indicators[index].classList.remove('bg-opacity-50');
+        indicators[index].classList.add('bg-opacity-100');
+        
+        currentSlide = index;
+      }
+      
+      // 下一张幻灯片
+      function nextSlide() {
+        let next = currentSlide + 1;
+        if (next >= totalSlides) {
+          next = 0;
+        }
+        showSlide(next);
+      }
+      
+      // 上一张幻灯片
+      function prevSlide() {
+        let prev = currentSlide - 1;
+        if (prev < 0) {
+          prev = totalSlides - 1;
+        }
+        showSlide(prev);
+      }
+      
+      // 点击指示器切换幻灯片
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+          showSlide(index);
+        });
+      });
+      
+      // 点击上一张/下一张按钮
+      prevButton.addEventListener('click', prevSlide);
+      nextButton.addEventListener('click', nextSlide);
+      
+      // 自动轮播
+      let slideInterval = setInterval(nextSlide, 5000);
+      
+      // 鼠标悬停时暂停轮播
+      const heroCarousel = document.getElementById('hero-carousel');
+      heroCarousel.addEventListener('mouseenter', () => {
+        clearInterval(slideInterval);
+      });
+      
+      // 鼠标离开时恢复轮播
+      heroCarousel.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(nextSlide, 5000);
+      });
+      
+      // 返回顶部按钮
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.remove('opacity-0', 'invisible');
+          backToTopButton.classList.add('opacity-100', 'visible');
+        } else {
+          backToTopButton.classList.remove('opacity-100', 'visible');
+          backToTopButton.classList.add('opacity-0', 'invisible');
+        }
+      });
+      
+      backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+      
+      // 个性化推荐刷新功能
+      const refreshButton = document.getElementById('refresh-recommendations');
+      const recommendationsContainer = document.getElementById('recommendations-container');
+      
+      refreshButton.addEventListener('click', function() {
+        // 添加旋转动画
+        refreshButton.querySelector('i').classList.add('fa-spin');
+        
+        // 模拟加载延迟
+        setTimeout(() => {
+          // 移除旋转动画
+          refreshButton.querySelector('i').classList.remove('fa-spin');
+          
+          // 显示刷新成功提示
+          const toast = document.createElement('div');
+          toast.className = 'fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+          toast.textContent = '推荐已更新！';
+          document.body.appendChild(toast);
+          
+          // 3秒后移除提示
+          setTimeout(() => {
+            toast.remove();
+          }, 3000);
+        }, 1000);
+      });
+      
+      // 为所有卡片添加点击事件
+      const animeCards = document.querySelectorAll('.card-hover');
+      animeCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const title = this.querySelector('h3').textContent;
+          alert(`你点击了《${title}》，即将跳转到详情页面！`);
+        });
+      });
+      
+      // 为所有"观看"按钮添加点击事件
+      const watchButtons = document.querySelectorAll('.bg-secondary');
+      watchButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.stopPropagation(); // 阻止事件冒泡
+          const title = this.closest('.card-hover').querySelector('h3').textContent;
+          alert(`正在播放《${title}》，请稍候...`);
+        });
+      });
+      
+      // 为所有"立即观看"按钮添加点击事件
+      const watchNowButtons = document.querySelectorAll('.bg-accent');
+      watchNowButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.stopPropagation(); // 阻止事件冒泡
+          const title = this.closest('.card-hover').querySelector('h3').textContent;
+          alert(`正在播放《${title}》，请稍候...`);
+        });
+      });
+    });
+  </script>
 </body>
-
 </html>
